@@ -114,6 +114,14 @@ LogJS.api.Level = new (function() {
         return Utils.getOrElse(res, self.defaultStr);
     };
 
+    self.intToPrettyStr = function(ilvl) {
+        return self.intToStr(ilvl).toUpperCase();
+    };
+
+    self.intToFixedStr = function(ilvl) {
+        return self.strsFixed[ilvl];
+    };
+
     return self;
 })();
 
@@ -166,7 +174,7 @@ LogJS.api.Log = function Log(_opts) {
 
     /** @return {string} Current logging level. */
     self.getLevel = function() {
-        return Level.intToStr(curILevel);
+        return Level.intToPrettyStr(curILevel);
     };
 
     self.setLevel = function(slvl) {
@@ -228,7 +236,7 @@ LogJS.api.Log = function Log(_opts) {
         }
 
         var dateTime = moment(new Date()).format('HH:mm:ss.SSS');
-        var fixedLevel = Level.strsFixed[ilvl];
+        var fixedLevel = Level.intToFixedStr(ilvl);
 
         // TODO: Use patterns from config.
         var fullMsg = dateTime + " " + fixedLevel + " [" + name + "] " + msg;
