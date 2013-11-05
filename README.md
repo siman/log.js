@@ -1,6 +1,6 @@
 # Log.js
 
-JavaScript logging framework with log levels
+Handy logging wrapper around `window.console` with log levels for JavaScript.
 
 ## Required libs
 
