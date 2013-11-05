@@ -25,6 +25,13 @@ myLog.trace(function() {
 });
 ```
 
+Example of console output:
+```
+01:48:36.569 INFO  [MyLog] Hello, Log
+01:48:36.570 WARN  [MyLog] Hello, Log
+01:48:36.570 ERROR [MyLog] Hello, Log
+```
+
 ## Log levels
 
 Log levels (case insensitive):
