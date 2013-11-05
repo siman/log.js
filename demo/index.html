@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LogJS demo</title>
+</head>
+<body>
+    <h1>LogJS demo</h1>
+    Message: <input type="text" id="msg" value="Hello, LogJS"/>
+    Level: <select id="lvl">
+        <option value="trace">TRACE</option>
+        <option value="debug" selected="selected">DEBUG</option>
+        <option value="info">INFO</option>
+        <option value="warn">WARN</option>
+        <option value="error">ERROR</option>
+        <option value="fatal">FATAL</option>
+        <option value="off">OFF</option>
+    </select>
+    <input type="button" onclick="logIt()" value="Log it!"/>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
+    <script src="../src/log-0.0.1.js"></script>
+    <script>
+        var demoLog = LogJS.get({name: "Demo"});
+        var clickId = null;
+
+        // Get message using function.
+        var msg = function(prefix) {
+//            demoLog.debug("Getting message from input...");
+            return "ClickId(" + clickId + ") " + document.getElementById("msg").value;
+        };
+
+        function logIt() {
+            clickId = Math.floor((Math.random() * 100) + 1);
+            var lvl = document.getElementById("lvl").value;
+            demoLog.setLevel(lvl);
+            demoLog.trace(msg);
+            demoLog.debug(msg);
+            demoLog.info(msg);
+            demoLog.warn(msg);
+            demoLog.error(msg);
+            demoLog.fatal(msg);
+        }
+    </script>
+</body>
+</html>
