@@ -25,6 +25,17 @@ myLog.trace(function() {
 });
 ```
 
+## Log levels
+
+Log levels (case insensitive):
+
+1. TRACE (the least serious)
+2. DEBUG (default)
+3. INFO
+4. WARN
+5. ERROR
+6. FATAL (the most serious)
+
 ## Date & Time formatting
 
 Formatting of date and time is done via moment.js
