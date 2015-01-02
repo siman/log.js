@@ -164,6 +164,7 @@ LogJS.api.Log = function Log(_opts) {
     var name = Utils.getOrElse(opts.name, self.constructor.name);
     var enabled = Utils.getOrElse(opts.enabled, true);
     var curILevel = Level.strToInt(opts.level);
+    var timeStampCreator = null;
 
     // Log level can be passed as string or number.
 //    var levelAny = getOrElse(opts.name, self.constructor.name);
@@ -171,6 +172,13 @@ LogJS.api.Log = function Log(_opts) {
     self.getName = function() {
         return name;
     };
+    
+    self.setTimeStampCreator = function (fn) {
+    	if (typeof fn !== "function" && fn != null) {
+    		throw new Error("Timestamp creator has to be a function");
+    	}
+    	timeStampCreator = fn;
+	};
 
     /** @return {string} Current logging level. */
     self.getLevel = function() {
@@ -235,7 +243,8 @@ LogJS.api.Log = function Log(_opts) {
             msg = "" + _msg;
         }
 
-        var dateTime = moment(new Date()).format('HH:mm:ss.SSS');
+        var cDate = new Date();
+        var dateTime = self.timeStampCreator? self.timeStampCreator(cDate) : cDate.toLocaleString();
         var fixedLevel = Level.intToFixedStr(ilvl);
 
         // TODO: Use patterns from config.
